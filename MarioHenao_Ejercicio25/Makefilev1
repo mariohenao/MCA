@@ -1,0 +1,23 @@
+CXX=g++
+CXX_2=python3
+N = 500000
+Mu = 0
+Sigma = 1
+
+output: main.x
+	./main.x $(N) $(Mu) $(Sigma) > datos.txt
+	$(CXX_2) Read_data.py datos $(Mu) $(Sigma)
+
+main.x: sampling.cpp
+	$(CXX) -o main.x sampling.cpp
+
+datos: datos.txt
+	$(CXX_2) Read_data.py datos.txt $(Mu) $(Sigma)
+clean1:
+	rm *.txt
+	rm *.x
+
+clean2:
+	rm *.x
+	rm *.pdf
+	rm *.txt
